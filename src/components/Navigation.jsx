@@ -7,17 +7,16 @@ export default function Navigation({ currentSection }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'hero', label: 'Accueil' },
-    { id: 'services', label: 'Services' },
-    { id: 'why-tamebi', label: 'Pourquoi Nous' },
-    { id: 'approach', label: 'Notre Approche' },
-    { id: 'benefits', label: 'Vos Bénéfices' },
-    { id: 'about', label: 'À Propos' }
+  { id: 'hero', label: 'Accueil' },
+  { id: 'approach', label: 'Notre Approche' },
+  { id: 'services', label: 'Nos services' },
+  { id: 'about', label: 'À Propos' },
+  
   ];
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); 
   };
 
   return (
@@ -35,7 +34,7 @@ export default function Navigation({ currentSection }) {
             onClick={() => scrollToSection('hero')}
             whileHover={{ scale: 1.05 }}
           >
-            <img src={logo} alt="Tamebi Logo" className="h-16" />
+            <img src={logo} alt="Tamebi Logo" className="h-16 w-24 rounded-lg bg-white p-1 border border-yellow-400 shadow" />
           </motion.div>
 
           {/* Desktop Navigation */}

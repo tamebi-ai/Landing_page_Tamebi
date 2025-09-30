@@ -11,24 +11,6 @@ import {
 } from "lucide-react";
 
 export default function AboutSection() {
-  const teamValues = [
-    {
-      icon: Brain,
-      title: "Innovation",
-      description: "Toujours à la pointe des dernières avancées IA"
-    },
-    {
-      icon: Users,
-      title: "Collaboration",
-      description: "Travail d'équipe pour des résultats exceptionnels"
-    },
-    {
-      icon: Award,
-      title: "Excellence",
-      description: "Qualité et performance dans chaque projet"
-    }
-  ];
-
   return (
     <section id="about" className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
@@ -90,50 +72,9 @@ export default function AboutSection() {
                 Devenir le partenaire de référence pour l'intégration de l'IA dans tous les secteurs, 
                 en proposant des solutions sur mesure qui transforment réellement les entreprises et améliorent le quotidien.
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center">
-                  <div className="text-3xl font-black text-yellow-400 mb-1">100+</div>
-                  <div className="text-sm text-gray-400">Heures de Formation</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-black text-yellow-400 mb-1">24/7</div>
-                  <div className="text-sm text-gray-400">Support Client</div>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Values */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-3xl font-bold text-white text-center mb-12">Nos Valeurs</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {teamValues.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
-                className="text-center group"
-              >
-                <div className="bg-white/5 backdrop-blur-sm border border-yellow-400/20 rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <value.icon className="w-8 h-8 text-black" />
-                  </div>
-                  <h4 className="text-xl font-bold text-white mb-4">{value.title}</h4>
-                  <p className="text-gray-400 leading-relaxed">{value.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

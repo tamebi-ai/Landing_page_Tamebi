@@ -28,16 +28,38 @@ export default function ContactSection() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 3000);
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      } else {
+        // Handle server errors (e.g., validation errors)
+        const errorMessage = data.errors ? data.errors.join(', ') : (data.message || 'An error occurred');
+        console.error('Server error:', errorMessage);
+        // Optionally, display an error message to the user
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      // Optionally, display a network error message to the user
+    }
   };
 
   const contactInfo = [
@@ -50,14 +72,14 @@ export default function ContactSection() {
     {
       icon: Phone,
       title: "Téléphone",
-      content: "+ 229 (01)  44 912 950",
+      content: "+ 229 01  44 912 950",
       description: "Appelez-nous du lundi au vendredi"
     },
     {
       icon: Clock,
       title: "Horaires",
-      content: "9h - 18h",
-      description: "Du lundi au vendredi"
+      content: "7 jours / 7",
+      description: "Disponible à tout moment"
     }
   ];
 
@@ -74,15 +96,11 @@ export default function ContactSection() {
           
           
           <h2 className="text-4xl md:text-6xl font-black text-black mb-6">
-            Prêt à 
-            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent ml-4">
-              Commencer
-            </span>
-            ?
+            Prêt à <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">transformer</span> votre entreprise avec l'<span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">IA</span> ?
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discutons de votre projet et découvrons ensemble comment l'IA peut transformer votre entreprise
+            La révolution IA est en marche. Ne la subissez pas, maîtrisez-la. Contactez-nous dès aujourd'hui pour une consultation gratuite et découvrez comment l'IA peut devenir votre principal avantage concurrentiel.
           </p>
         </motion.div>
 
@@ -104,7 +122,7 @@ export default function ContactSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-start gap-4"
+                  className="flex items-center gap-4"
                 >
                   <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                     <info.icon className="w-6 h-6 text-black" />
@@ -116,23 +134,6 @@ export default function ContactSection() {
                   </div>
                 </motion.div>
               ))}
-            </div>
-
-            <div className="bg-black rounded-3xl p-8 text-white">
-              <h4 className="text-xl font-bold mb-4">Pourquoi nous choisir ?</h4>
-              <div className="space-y-3">
-                {[
-                  "Réponse sous 24h garantie",
-                  "Consultation gratuite de 30 minutes",
-                  "Devis personnalisé et transparent",
-                  "Accompagnement dédié"
-                ].map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-yellow-400" />
-                    <span className="text-gray-300">{benefit}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </motion.div>
 
@@ -160,16 +161,16 @@ export default function ContactSection() {
 
             <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                                <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-black mb-2">Nom *</label>
+                    <label className="block text-sm font-semibold text-black mb-2">Nom complet *</label>
                     <input
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="rounded-xl border-gray-200 focus:border-yellow-400 focus:ring-yellow-400"
-                      placeholder="Votre nom"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-yellow-400 text-black"
+                      placeholder="Votre nom complet"
                     />
                   </div>
                   <div>
@@ -180,7 +181,7 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="rounded-xl border-gray-200 focus:border-yellow-400 focus:ring-yellow-400"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-yellow-400 text-black"
                       placeholder="votre@email.com"
                     />
                   </div>
@@ -194,7 +195,7 @@ export default function ContactSection() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="rounded-xl border-gray-200 focus:border-yellow-400 focus:ring-yellow-400 resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-yellow-400 resize-none text-black"
                     placeholder="Décrivez votre projet ou votre besoin..."
                   ></textarea>
                 </div>
@@ -203,7 +204,7 @@ export default function ContactSection() {
                   type="submit"
                   className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-300 hover:to-yellow-500 font-semibold py-4 rounded-xl text-lg transition-all duration-300 flex items-center justify-center"
                 >
-                  Envoyer le Message
+                  Lancer ma transformation
                   <Send className="ml-2 w-5 h-5" />
                 </button>
               </form>

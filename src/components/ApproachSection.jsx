@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, PenTool, Rocket, Check, Copy, Shield, Gauge, Zap, CheckCircle } from "lucide-react";
+import { Search, Target, Code, Rocket, Check, Copy, Shield, Gauge, Zap, CheckCircle } from "lucide-react";
 
 export default function ApproachSection() {
   const [copied, setCopied] = useState(false);
@@ -24,19 +24,23 @@ export default function ApproachSection() {
   const steps = [
     {
       icon: Search,
-      title: "1. Compréhension & Analyse",
-      description: "Nous analysons vos besoins en profondeur pour explorer les solutions les plus adaptées à votre contexte et à vos objectifs."
+      title: "1. Découverte",
+      description: "Nous commençons par une consultation pour comprendre vos défis, vos processus actuels et vos objectifs."
     },
     {
-      icon: PenTool,
-      title: "2. Conception & Validation",
-      description: "Nous concevons des solutions sur mesure et les testons rigoureusement pour garantir leur fiabilité et leur performance.",
-      extraContent: null
+      icon: Target,
+      title: "2. Stratégie",
+      description: "Nous élaborons une feuille de route IA sur mesure, en identifiant les cas d'usage les plus pertinents et en définissant l'architecture technique."
+    },
+    {
+      icon: Code,
+      title: "3. Développement",
+      description: "Notre équipe d'experts développe les agents IA, les produits ou les intégrations nécessaires pour concrétiser la stratégie."
     },
     {
       icon: Rocket,
-      title: "3. Lancement & Maintenance",
-      description: "Votre solution est mise en service sans accroc, puis nous veillons à sa performance optimale et à son évolution sur le long terme."
+      title: "4. Déploiement & Formation",
+      description: "Nous déployons la solution et formons vos équipes pour qu'elles puissent l'utiliser de manière autonome et en tirer le meilleur parti."
     }
   ];
 
@@ -51,16 +55,14 @@ export default function ApproachSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black text-black mb-4">
-            L'IA pour un changement 
-            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent ml-4">durable</span>
+            De l'idée à l'impact en 4 étapes
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Une approche collaborative et efficace, centrée sur les réalités africaines.
           </p>
         </motion.div>
-        
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-yellow-400/20 transform -translate-x-1/2 hidden md:block"></div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -68,20 +70,14 @@ export default function ApproachSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="md:flex items-center mb-16 md:mb-24"
+              className="bg-white border border-yellow-400/20 rounded-3xl p-4 sm:p-6 shadow-lg flex flex-col items-center text-center w-full"
+              style={{ minWidth: 0 }}
             >
-              <div className={`md:w-1/2 ${index === 1 ? 'md:order-2' : ''} flex justify-center items-center`}>
-                <div className="max-w-md mx-auto text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-black to-gray-800 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-                    <step.icon className="w-8 h-8 text-yellow-400" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-black mb-4">{step.title}</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">{step.description}</p>
-                </div>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-black to-gray-800 rounded-2xl flex items-center justify-center mb-4">
+                <step.icon className="w-8 h-8 text-yellow-400" />
               </div>
-              <div className={`md:w-1/2 p-4 md:p-8 ${index === 1 ? 'md:order-1' : ''} flex justify-center items-center`}>
-                {step.extraContent ? step.extraContent : <div className="hidden md:block"></div>}
-              </div>
+              <h3 className="text-base sm:text-lg md:text-2xl font-bold text-black mb-2 sm:mb-4 break-words whitespace-normal overflow-wrap break-word">{step.title}</h3>
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed break-words whitespace-normal overflow-wrap break-word">{step.description}</p>
             </motion.div>
           ))}
         </div>

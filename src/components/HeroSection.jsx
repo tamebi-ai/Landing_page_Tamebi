@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import { ArrowRight, Brain, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Brain, Sparkles, Users, ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
   const scrollToServices = () => {
@@ -33,19 +33,14 @@ export default function HeroSection() {
         >
           <span className="text-white">L'</span>
           <span className="text-yellow-400 relative">
-            IA
+            IA de pointe
             <motion.div 
               className="absolute -inset-2 bg-yellow-400/20 rounded-lg blur-xl"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </span>
-          <span className="text-white"> au Service</span>
-          <br />
-          <span className="text-white">de l'</span>
-          <span className="bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
-            Innovation
-          </span>
+          <span className="text-white bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent"> à votre service</span>
         </motion.h1>
 
         <motion.p
@@ -54,8 +49,8 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
         >
-          Chez <span className="text-yellow-400 font-semibold">Tamebi</span>, nous révolutionnons votre quotidien avec des solutions d'intelligence artificielle sur mesure. 
-          Projets innovants, formations expertes, et accompagnement personnalisé.
+          Nous aidons les entreprises à <span className="text-yellow-400 font-semibold">optimiser leurs processus et à se transformer</span> grâce à l'IA, de la création d'agents autonomes à la formation des équipes.
+
         </motion.p>
 
         <motion.div
@@ -68,14 +63,15 @@ export default function HeroSection() {
             onClick={scrollToServices}
             className="bg-yellow-400 text-black hover:bg-yellow-300 font-semibold px-8 py-4 text-lg rounded-full group transition-all duration-300"
           >
-            Découvrir nos Services
+           Démarrez votre consultation gratuite
           </button>
           
           <button 
             onClick={scrollToContact}
             className="border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-semibold px-8 py-4 text-lg rounded-full transition-all duration-300"
           >
-            Discutons de votre Projet
+             Découvrir nos Services
+            
           </button>
         </motion.div>
 
@@ -109,9 +105,7 @@ export default function HeroSection() {
         transition={{ duration: 2, repeat: Infinity }}
         onClick={scrollToServices}
       >
-        <div className="w-6 h-10 border-2 border-yellow-400/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-yellow-400 rounded-full mt-2 animate-pulse"></div>
-        </div>
+        <ChevronDown className="w-8 h-8 text-yellow-400 hover:text-yellow-300 transition-colors duration-300" />
       </motion.div>
     </section>
   );
